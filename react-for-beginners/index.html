@@ -10,14 +10,15 @@
 </body>
 <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-<script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- <script>
     const root = document.querySelector("#root");
     const span = React.createElement(
         "h3", 
         {
         onMouseEnter: () => console.log("mouse enter"), //{id:"sexy-span", style:{color:"red"} }, 
         },
-        "Hello I am a span"
+        "Hello I am a span" 
     );
     const btn = React.createElement(
         "button",
@@ -27,8 +28,31 @@
         "click me" 
     );
     const container = React.createElement("div", null,[span, btn]);
+    // 두번째 파라미터는 property 를 가진다. (없는 경우 null)
     //reactJS : interactive UI 를 만들 수 있게 한다. 
     ReactDOM.render(container, root);
     //react Dom : react element 를 html 에 두는 역할을 한다. 
+</script> -->
+<script type="text/babel"> 
+    // JSX 는 js 를 확장한 문법 
+    const root = document.querySelector("#root");
+    function Title() = {
+        return (
+            <h3 id="title" onMouseEnter={() => console.log("mouse is enter")}>
+                Hello
+            </h3>
+        );
+    }
+    const btn = (
+        <button style={{
+            backgroundColor : "tomato", 
+        }} onMouseEnter={() => console.log("tomato is enter")}> 
+            Click me 
+        </button>
+    )
+    const container = <div>
+        Title button
+        </div>
+    ReactDOM.render(container, root);
 </script>
 </html>
