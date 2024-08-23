@@ -36,23 +36,36 @@
 <script type="text/babel"> 
     // JSX 는 js 를 확장한 문법 
     const root = document.querySelector("#root");
-    function Title() = {
+
+    function Title() {
         return (
             <h3 id="title" onMouseEnter={() => console.log("mouse is enter")}>
                 Hello
             </h3>
         );
     }
-    const btn = (
-        <button style={{
-            backgroundColor : "tomato", 
-        }} onMouseEnter={() => console.log("tomato is enter")}> 
+
+    const Button = () => (
+        <button 
+            style={{
+                backgroundColor : "tomato", 
+            }} 
+            onMouseEnter={() => console.log("tomato is enter")}
+        > 
             Click me 
         </button>
-    )
-    const container = <div>
-        Title button
+    );
+    // 내가 만드는 컴포넌트는 시작이 무조건 대문자여야 한다. 
+
+    // 여러 컴포넌트 들이 합쳐진 구성
+    const Container = () => (
+        <div> 
+            <button> click me</button>
+            <Title />
+            <Button />
         </div>
-    ReactDOM.render(container, root);
+    );
+
+    ReactDOM.render(<Container/>, root);
 </script>
 </html>
