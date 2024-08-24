@@ -36,13 +36,17 @@
 <script type="text/babel"> 
     const root = document.querySelector("#root");
     function App() {
-        const [counter, modifier] = React.useState(0);
-        <div> 
-            <h3> Total clicks : {counter}</h3>
-            <button>Click me</button>
-        </div>
+        const [counter, setCounter] = React.useState(0);
+        const onClick = () => {
+            setCounter(counter +1);
+        }
+        return (
+            <div> 
+                <h3> Total clicks : {counter}</h3>
+                <button onClick={onClick}>Click me</button>
+            </div>
+        )
     };
-
     ReactDOM.render(<App />, root);
 </script>
 </html>
