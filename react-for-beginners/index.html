@@ -34,38 +34,15 @@
     //react Dom : react element 를 html 에 두는 역할을 한다. 
 </script> -->
 <script type="text/babel"> 
-    // JSX 는 js 를 확장한 문법 
     const root = document.querySelector("#root");
-
-    function Title() {
-        return (
-            <h3 id="title" onMouseEnter={() => console.log("mouse is enter")}>
-                Hello
-            </h3>
-        );
-    }
-
-    const Button = () => (
-        <button 
-            style={{
-                backgroundColor : "tomato", 
-            }} 
-            onMouseEnter={() => console.log("tomato is enter")}
-        > 
-            Click me 
-        </button>
-    );
-    // 내가 만드는 컴포넌트는 시작이 무조건 대문자여야 한다. 
-
-    // 여러 컴포넌트 들이 합쳐진 구성
-    const Container = () => (
+    function App() {
+        const [counter, modifier] = React.useState(0);
         <div> 
-            <button> click me</button>
-            <Title />
-            <Button />
+            <h3> Total clicks : {counter}</h3>
+            <button>Click me</button>
         </div>
-    );
+    };
 
-    ReactDOM.render(<Container/>, root);
+    ReactDOM.render(<App />, root);
 </script>
 </html>
