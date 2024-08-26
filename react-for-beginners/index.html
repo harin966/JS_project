@@ -33,12 +33,13 @@
     ReactDOM.render(container, root);
     //react Dom : react element 를 html 에 두는 역할을 한다. 
 </script> -->
-<script type="text/babel"> 
+<!-- <script type="text/babel"> 
     const root = document.querySelector("#root");
-    function App() {
+    function oldApp() {
         const [counter, setCounter] = React.useState(0);
         const onClick = () => {
-            setCounter(counter +1);
+            //setCounter(counter +1);
+            setCounter((current) => current + 1);
         }
         return (
             <div> 
@@ -48,5 +49,54 @@
         )
     };
     ReactDOM.render(<App />, root);
+</script> -->
+<script type="text/babel">
+    const root = document.querySelector("#root");
+    function App() {
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) => {
+            setAmount(event.target.value)
+        };
+        const reset = () => { setAmount(0);};
+        const onFlip = () =>  {
+            reset();
+            setFlipped((current) => !current);
+        }
+        return(
+            <div>
+                <h1>Super Converter</h1>    
+                <div>
+                <label htmlFor="minutes">Minutes</label>
+                <input 
+                    value={flipped ? amount* 60 : amount}
+                    id="minutes" 
+                    placeholder="Minutes" 
+                    type="number"
+                    onChange={onChange}
+                    disabled={flipped}
+                />
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input  
+                        value={flipped ? amount : amount / 60}
+                        id="hours" 
+                        placeholder="Hours" 
+                        type="number"
+                        onChange={onChange}
+                        disabled={!flipped}
+                    />
+                </div>
+                <button onClick={reset} > reset </button>
+                <button onClick={onFlip} > Flipped </button>
+            </div>
+        );
+    };
+
+    ReactDOM.render(<App />, root);
 </script>
 </html>
+
+
+
