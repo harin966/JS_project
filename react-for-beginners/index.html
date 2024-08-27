@@ -8,9 +8,10 @@
 <body>
     <div id="root"></div>
 </body>
-<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <!-- <script>
     const root = document.querySelector("#root");
     const span = React.createElement(
@@ -50,7 +51,7 @@
     };
     ReactDOM.render(<App />, root);
 </script> -->
-<script type="text/babel">
+<!-- <script type="text/babel">
     const root = document.querySelector("#root");
     function Minutes2Hours() {
         const [amount, setAmount] = React.useState(0);
@@ -132,25 +133,45 @@
                 <button onClick={onFlip} > Flipped </button>
             </div>
         );
+    }; -->
+<script type="text/babel">
+    const root = document.querySelector("#root");
+    // component 예시 
+    function Btn({text, changeValue, fontSize = 14}) {
+        console.log(text, "is rendered")
+        return <button 
+        onClick = {changeValue}
+        style={{
+            backgroundColor : "tomato", 
+            color : "white", 
+            padding : "10px 20px", 
+            border : 0, 
+            borderRadius : 10,
+            fontSize,
+        }}> {text} </button>;
     };
 
+    function ConfirmBtn() {
+        return <button> Confirm </button>;
+    };
+
+    const MemorizedBth = React.memo(Btn);
+    Btn.prototype = {
+        text : PropTypes.string.isRequired,
+        fontSize : PropTypes.number,
+    }
     function App() {
-        const [index, setIndex] = React.useState(0);
-        const onSelect = (event => {
-            setIndex(event.target.value);
-        })
+        const [value, setValue] = React.useState("Save Changes");
+        // 부모의 상태를 바꾸는 함수 
+        const changeValue = () => setValue("Revert Changes");
         return(
             <div>
-                <h1>Super Converter</h1>    
-                <select onChange={onSelect}>
-                    <option value="xx"> Select Options</option>
-                    <option value="0"> Minutes & Hours</option>
-                    <option value="1"> Km & Miles</option>
-                </select>
-                {index === "0" ? <Minutes2Hours /> : null}
-                {index === "1" ? <KM2Miles /> : null}
+                <Btn text={value} changeValue={changeValue} fontSize={18}/>
+                <MemorizedBth text="Continue" fontSize="12"/>
+                <Btn fontSize={18}/>
             </div>
         );
+        // 여기서 말하는 onClick 는 evnetLister 이 아니라 props 이름
     };
 
     ReactDOM.render(<App />, root);
