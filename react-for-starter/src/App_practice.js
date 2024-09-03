@@ -16,7 +16,7 @@ function App4() {
       });
   }, []) // App 이 render 될따 딱 한번만 실행된다. 
 
-  useEffect(() => {ß
+  useEffect(() => {
       console.log(coins);
   }, [coins])
   return (
