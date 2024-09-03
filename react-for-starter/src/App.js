@@ -1,16 +1,37 @@
 import { useEffect, useState } from "react";
 
+
 function App() {
     const [loading, setLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
+    const getMovies = async() => {
+        const json = await(await fetch(
+            //'https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year'
+            'https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year'
+        )).json();
+        setMovies(json.data.movies);
+        setLoading(false);
+    } // then 사용하는 방법과 동일한 효과 (then 대신 await 를 사용함)
     useEffect ( () => {
-        fetch().then(response => response.json).then(json => {
-            
-        });
+        getMovies()
     }, []);
-
+    console.log(movies);
     return (
     <div>
-        {loading ? <h1>Loading...</h1>: null}
+        {loading ? <h1>Loading...</h1>: 
+        <div>
+            {movies.map(movie => 
+            <div key = {movie.id}> 
+            <img src={movie.medium_cover_image}/>
+                <h2>{movie.title}</h2>
+                <p>{movie.summary}</p>
+                <ul>
+                    {movie.genres.map((g) => (
+                             <li key={g}>{g}</li>
+                    ))}
+                </ul>
+            </div>)}
+        </div>}
     </div>);
 }
 
