@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Movie from "./Movie.js"
+import PropTypes from "prop-types";
 
 
 function App() {
@@ -20,19 +22,23 @@ function App() {
     <div>
         {loading ? <h1>Loading...</h1>: 
         <div>
-            {movies.map(movie => 
-            <div key = {movie.id}> 
-            <img src={movie.medium_cover_image}/>
-                <h2>{movie.title}</h2>
-                <p>{movie.summary}</p>
-                <ul>
-                    {movie.genres.map((g) => (
-                             <li key={g}>{g}</li>
-                    ))}
-                </ul>
-            </div>)}
+            {movies.map(movie => ( 
+            <Movie 
+                key={movie.id} // map 함수를 사용할 때 key를 사용해야 함
+                coverImg={movie.medium_cover_image} 
+                title={movie.title} 
+                summary={movie.summary}
+                genres={movie.genres}
+             />))}
         </div>}
     </div>);
 }
+
+Movie.propTypes = {
+    coverImg: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired,
+    genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default App;
