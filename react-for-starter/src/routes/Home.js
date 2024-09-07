@@ -24,6 +24,7 @@ const Home = () => {
             {movies.map(movie => ( 
             <Movie 
                 key={movie.id} // map 함수를 사용할 때 key를 사용해야 함
+                id={movie.id}
                 coverImg={movie.medium_cover_image} 
                 title={movie.title} 
                 summary={movie.summary}

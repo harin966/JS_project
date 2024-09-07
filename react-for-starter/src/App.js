@@ -1,10 +1,22 @@
-import { useEffect, useState } from "react";
-import Movie from "./components/Movie.js"
-import PropTypes from "prop-types";
+import {
+    BrowserRouter as Router, 
+    Routes, 
+    Route, 
+} from "react-router-dom";
+import Home from "./routes/Home.js";
+import Detail from "./routes/Detail.js";
+
 
 
 function App() {
-    return null;
+    return (
+    <Router>
+        <Routes>
+            <Route path="/" element={<Home/>}/>  
+            <Route path="/Movie/:id" element={<Detail/>}/>  
+        </Routes>
+    </Router>
+    );
 }
 
 //App : router 을 return 하는 component
