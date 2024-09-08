@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import Movie from '../components/Movie';
+import Thumbnail from '../components/Thumbnail';
 import PropTypes from "prop-types";
 
 const Home = () => {
@@ -22,13 +23,11 @@ const Home = () => {
         {loading ? <h1>Loading...</h1>: 
         <div>
             {movies.map(movie => ( 
-            <Movie 
+            <Thumbnail 
                 key={movie.id} // map 함수를 사용할 때 key를 사용해야 함
                 id={movie.id}
-                coverImg={movie.medium_cover_image} 
+                image={movie.medium_cover_image} 
                 title={movie.title} 
-                summary={movie.summary}
-                genres={movie.genres}
              />))}
         </div>}
     </div>);
