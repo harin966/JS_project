@@ -8,7 +8,6 @@ function Button({text}) {
 
 Button.prototype =  {
     text:PropTypes.string.isRequired,
-
 }
 
 export default Button; 

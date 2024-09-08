@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Movie from "../components/Movie";
+import Button from "../Button";
 
 function Detail() {
     const [loading, setLoading] = useState(true);
@@ -29,7 +30,6 @@ function Detail() {
                     summary={theMovie.description_full}
                     genres={theMovie.genres}
                 />
-                <Link to="/"><button>back</button></Link>
             </div>}
         </div>
     )
